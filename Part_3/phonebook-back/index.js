@@ -3,8 +3,10 @@ const app = express()
 const bodyParser = require('body-parser')
 const { response, request } = require('express')
 app.use(bodyParser.json())
+const cors = require('cors')
+app.use(cors())
 
-console.log('Started server...')
+console.log('Starting server...')
 
 // Hardcoded persons list
 let persons = [
@@ -89,6 +91,20 @@ app.get('/', (req, res) => {
 app.get('/api/persons', (req, res) => {
     res.json(persons)
 })
+
+// Logger function
+const logger = (req, res, next) => {
+    console.log('Method: ', req.method)
+    console.log('Path: ', req.path)
+    console.log('Body: ', req.body)
+    console.log('---')
+    next()
+}
+const error = (req, res) => {
+    res.status(404).send({error: 'unknown endpoint'})
+}
+app.use(logger)
+app.use(error)
 
 const PORT = 3001
 app.listen(PORT, () => {
