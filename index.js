@@ -44,6 +44,7 @@ const Person = mongoose.model('Person', {
     }
   ]*/
 
+// Helper function to format person to be better suited for frontend with mongo
 const formatPerson = (person) => {
     return {
         name: person.name,
@@ -110,8 +111,10 @@ app.get('/', (req, res) => {
 // Display persons list
 app.get('/api/persons', (req, res) => {
     //res.json(persons)
-    Person.find({}).then(persons => {
-        res.json(persons.map(formatPerson))
+    Person
+        .find({})
+        .then(persons => {
+            res.json(persons.map(formatPerson))
     })
 })
 
@@ -123,10 +126,11 @@ const logger = (req, res, next) => {
     console.log('---')
     next()
 }
+app.use(logger)
+// Error function
 const error = (req, res) => {
     res.status(404).send({error: 'unknown endpoint'})
 }
-app.use(logger)
 app.use(error)
 
 // For Heroku
