@@ -3,7 +3,7 @@ import Persons from './components/Persons'
 import personService from './services/persons'
 import axios from 'axios'
 
-const baseUrl = '/persons'
+const baseUrl = '/api/persons'
 
 class App extends React.Component {
   constructor(props) {
