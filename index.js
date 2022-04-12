@@ -9,8 +9,19 @@ app.use(cors())
 
 console.log('Starting server...')
 
+// MONGO --------------------------
+const mongoose = require('mongoose')
+const url = 'mongodb+srv://kpturt:webmob3password@webmob3.m2e8b.mongodb.net'
+mongoose.connect(url)
+
+const Person = mongoose.model('Person', {
+    name: String,
+    number: String
+})
+// MONGO --------------------------
+
 // Hardcoded persons list
-let persons = [
+/*let persons = [
     {
       name: "Arto Hellas",
       number: "040-123456",
@@ -31,7 +42,15 @@ let persons = [
       number: "040-123456",
       id: 4
     }
-  ]
+  ]*/
+
+const formatPerson = (person) => {
+    return {
+        name: person.name,
+        number: person.number,
+        id: person._id
+    }
+}
 
 // Generate new random id with Math.random
 const generateId = () => {
@@ -90,7 +109,10 @@ app.get('/', (req, res) => {
 
 // Display persons list
 app.get('/api/persons', (req, res) => {
-    res.json(persons)
+    //res.json(persons)
+    Person.find({}).then(persons => {
+        res.json(persons.map(formatPerson))
+    })
 })
 
 // Logger function
