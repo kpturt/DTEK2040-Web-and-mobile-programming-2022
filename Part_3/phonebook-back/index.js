@@ -106,7 +106,14 @@ const error = (req, res) => {
 app.use(logger)
 app.use(error)
 
-const PORT = 3001
+// For Heroku
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
+
+// For local
+/*const PORT = 3001
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+})*/
