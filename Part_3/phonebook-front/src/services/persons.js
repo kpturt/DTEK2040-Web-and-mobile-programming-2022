@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/persons'
+const baseUrl = '/api/persons'
 
 // For local
 /*const getAll = () => {
