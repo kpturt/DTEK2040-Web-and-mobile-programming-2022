@@ -11,7 +11,7 @@ const mongoose = require('mongoose')
 console.log('Starting server...')
 
 // MONGO --------------------------
-const url = process.env.MONGODB_URI
+const url = 'mongodb+srv://kpturt:webmob3password@webmob3.m2e8b.mongodb.net'
 mongoose.connect(url)
 const Person = mongoose.model('Person', {
     name: String,
