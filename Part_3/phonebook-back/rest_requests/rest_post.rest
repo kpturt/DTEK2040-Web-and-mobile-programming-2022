@@ -1,0 +1,8 @@
+//add a new person and a phone number with request parameters
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "asd",
+    "number": "123"
+}
