@@ -1,0 +1,6 @@
+This is only half of the exersises, 3.1-1.6. The rest of the exersises as well as
+the final version of the app are on branch heroku-part3
+
+repository: https://github.com/kpturt/DTEK2040-Web-and-mobile-programming-2022.git
+branch: heroku-part3
+heroku application link: https://thawing-meadow-84096.herokuapp.com/
