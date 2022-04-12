@@ -1,5 +1,5 @@
 //add a new person and a phone number with request parameters
-POST http://localhost:3001/api/persons
+POST https://thawing-meadow-84096.herokuapp.com/api/persons
 content-type: application/json
 
 {

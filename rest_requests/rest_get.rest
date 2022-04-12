@@ -1,2 +1,2 @@
 //last number is the id of the person to get
-GET http://localhost:3001/api/persons/1
+GET https://thawing-meadow-84096.herokuapp.com/api/persons/1
