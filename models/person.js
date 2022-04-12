@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-const url = 'mongodb+srv://kpturt:webmob3password@webmob3.m2e8b.mongodb.net'
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
+const url = process.env.MONGODB_URI
 
 mongoose.connect(url)
 

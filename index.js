@@ -41,6 +41,7 @@ app.post('/api/persons', (request, response) => {
         console.log("error: number missing")
         return response.status(400).json({error: 'number missing'})
     }
+    // Didn't work and wasn't needed
     /*if( persons.map(person => person.name).includes(body.name) ) {
         console.log("error: person already exists")
         return response.status(400).json({error: 'person already added'})
@@ -55,7 +56,10 @@ app.post('/api/persons', (request, response) => {
         .then(savedPerson => {
             response.json(formatPerson(savedPerson))
             console.log(`adding person: ${person.name} number: ${person.number}`)
-    })
+        })
+        .catch(error => {
+            console.log(error)
+        })
     console.log("POST body :", body)
 })
 
@@ -82,7 +86,10 @@ app.get('/api/persons', (req, res) => {
         .find({})
         .then(persons => {
             res.json(persons.map(formatPerson))
-    })
+        })
+        .catch(error => {
+            console.log(error)
+        })
 })
 
 // Get a single contact
@@ -99,7 +106,9 @@ app.get('/api/persons/:id', (request, response) => {
                 response.status(404).end()
             }
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+        })
     console.log(`GET id: ${id} name: ${Person.name}`) // logs wrong value
 })
 
@@ -135,3 +144,33 @@ app.listen(PORT, () => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })*/
+
+//---------------------------------------------------------------
+
+/* Additionally, command line arguments for exersise 3.9. Also on main branch.
+const Person = mongoose.model('Person', {
+    name: String,
+    number: String
+})
+
+if((process.argv[2] || process.argv[3]) == null){
+    console.log("No arguments, outputting database...")
+    console.log("puhelinluettelo:")
+    Person.find({}).then(result => {
+        result.forEach(person => {
+            console.log(person.name, person.number)
+        })
+        mongoose.connection.close()
+    })
+} else {
+    console.log("Arguments given, adding person to database...")
+    const person = new Person({
+        name: process.argv[2],
+        number: process.argv[3]
+    })
+    person.save().then(response => {
+        console.log(`adding person ${person.name} number ${person.number}`)
+        mongoose.connection.close()
+    })
+}
+*/
