@@ -6,18 +6,35 @@ const { response, request } = require('express')
 app.use(bodyParser.json())
 const cors = require('cors')
 app.use(cors())
+const mongoose = require('mongoose')
 
 console.log('Starting server...')
 
 // MONGO --------------------------
-const mongoose = require('mongoose')
 const url = 'mongodb+srv://kpturt:webmob3password@webmob3.m2e8b.mongodb.net'
 mongoose.connect(url)
-
 const Person = mongoose.model('Person', {
     name: String,
     number: String
 })
+// Helper function to format person to be better suited for frontend with mongo
+const formatPerson = (person) => {
+    return {
+        name: person.name,
+        number: person.number,
+        id: person._id
+    }
+}
+// Display persons list
+app.get('/api/persons', (req, res) => {
+    //res.json(persons)
+    Person
+        .find({})
+        .then(persons => {
+            res.json(persons.map(formatPerson))
+    })
+})
+
 // MONGO --------------------------
 
 // Hardcoded persons list
@@ -44,14 +61,7 @@ const Person = mongoose.model('Person', {
     }
   ]*/
 
-// Helper function to format person to be better suited for frontend with mongo
-const formatPerson = (person) => {
-    return {
-        name: person.name,
-        number: person.number,
-        id: person._id
-    }
-}
+
 
 // Generate new random id with Math.random
 const generateId = () => {
@@ -106,16 +116,6 @@ app.delete('/api/persons/:id', (request, response) => {
 // Directory home display
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
-})
-
-// Display persons list
-app.get('/api/persons', (req, res) => {
-    //res.json(persons)
-    Person
-        .find({})
-        .then(persons => {
-            res.json(persons.map(formatPerson))
-    })
 })
 
 // Logger function
