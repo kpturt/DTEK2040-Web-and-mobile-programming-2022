@@ -1,1 +1,3 @@
-https://github.com/kpturt/DTEK2040-Web-and-mobile-programming-2022.git
+repository: https://github.com/kpturt/DTEK2040-Web-and-mobile-programming-2022.git
+branch: heroku-part3
+heroku application link: https://thawing-meadow-84096.herokuapp.com/
