@@ -25,25 +25,25 @@ const NotesScreen = () => {
     return max+1;
   }
 
-  return (
+  return ( 
     <View style={styles.view}>
       <View style={styles.header}>
         <Text>My notes</Text>
       </View>
-      <View style={styles.notes}>
+      <ScrollView style={styles.notes}>
         <Text>{notes.map(note => `${note.text} ${note.id} \n`)}</Text>
-      </View>
+      </ScrollView>
       <View>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Type here to translate!"
-        onChangeText={newText => setText(newText)}
-        defaultValue={text}
-      />
-      <View style={styles.button}>
-        <Button title="add note" onPress={() => handleChangeText()} />
+        <TextInput
+          style={{height: 40}}
+          placeholder="Type here to translate!"
+          onChangeText={newText => setText(newText)}
+          defaultValue={text}
+        />
+        <View style={styles.button}>
+          <Button title="add note" onPress={() => handleChangeText()} />
+        </View>
       </View>
-    </View>
     </View>
   );
 }
@@ -52,12 +52,11 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
+      <NavigationContainer>
       <Stack.Navigator initialRouteName="Notes">
-        <Stack.Screen name="Notes" component={NotesScreen}/>
-        
+        <Stack.Screen name="Notes" component={NotesScreen}/>  
       </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
   );
 }
 
