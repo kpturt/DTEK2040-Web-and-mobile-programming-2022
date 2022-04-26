@@ -4,9 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from './Styles';
 //import notes from './Notes';
+
 
 
 const NotesScreen = () => {
@@ -18,7 +20,17 @@ const NotesScreen = () => {
     { text: "Note d", id: 4 },
   ]);
 
-  const route = useRoute();
+  const persons = [
+    {
+      name: "asd"
+    },
+    {
+      name: "dsa"
+    }
+  ]
+  const dataString = JSON.stringify(persons)
+  AsyncStorage.setItem('key', dataString)
+
   const navigation = useNavigation();
 
   return ( 
@@ -36,16 +48,18 @@ const NotesScreen = () => {
           }
         />
       </ScrollView>
+      
     </View>
   );
 }
 
 const AddNoteScreen = () => {
-    
     const route = useRoute();
-    const navigation = useNavigation();
 
     const [text, setText] = useState('');
+
+    const asd = AsyncStorage.getItem('key')
+    console.log(asd)
 
     const generateID = () => {
       const max = Math.max.apply(null, notes.map(item => item.id))
@@ -75,7 +89,7 @@ const AddNoteScreen = () => {
           ]
         )
       } else {
-        setNotes([...notes, {text: text, id: generateID()}])
+        route.params.setNotes([...route.params.notes, {text: text, id: generateID()}])
         setText('')
       }
     }
@@ -83,6 +97,9 @@ const AddNoteScreen = () => {
   return(
     <View>
       <View>
+        <View>
+          {parsed}
+        </View>
         <TextInput
           style={styles.input}
           placeholder="Type here to add a note.."
