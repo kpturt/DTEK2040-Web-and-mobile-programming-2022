@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, Button, ActivityIndicator, TextInput, ScrollView } from 'react-native';
+import { Text, View, Button, ActivityIndicator, TextInput, ScrollView, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -16,9 +16,33 @@ const NotesScreen = () => {
   ]);
 
   const [text, setText] = useState('');
+
   const handleChangeText = event => {
-    setNotes([...notes, {text: text, id: generateID()}])
-    setText('')
+    if(notes.map(note => note.text).includes(text)){
+      //simple alert -> alert('Note already exists!')
+      //alert with buttons
+      Alert.alert(
+        "Note that you are trying to add already exists!",
+        "Would you like to add it anyway?",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel pressed"),
+            style: "alert_cancel" //not implemented
+          },
+          {
+            text: "Add dublicate", onPress: () => {
+              setNotes([...notes, {text: text, id: generateID()}])
+              setText('')
+            },
+            style: "alert_ok" //not implemented
+          }
+        ]
+      )
+    } else {
+      setNotes([...notes, {text: text, id: generateID()}])
+      setText('')
+    }
   }
   
   const generateID = () =>{
