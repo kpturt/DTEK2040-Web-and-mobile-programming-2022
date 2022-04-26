@@ -4,21 +4,39 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-        backgroundColor: "red"
+        flexDirection: "column",
+        backgroundColor: "#FFD8CB"
     },
     header: {
+      paddingTop: 10,
       alignSelf: "center",
-      backgroundColor: 'blue'
+      //backgroundColor: '#f4f1de'
     },
     notes: {
       flex: 1,
-      backgroundColor: 'yellow',
+      margin: 10,
+      padding: 20,
+      backgroundColor: 'white',
       fontWeight: 'bold',
       fontSize: 30
     },
-    button: {
-      height: 100,
-      color: "#000"
+    input: {
+      textAlign: "center",
+      height: 40,
+      paddingLeft: 50,
+      paddingRight: 50,
+      margin: 10,
+      backgroundColor: '#FFE9E3',
+    },
+    buttonArea: {
+      paddingLeft: 100,
+      paddingRight: 100,
+      height: 50,
+      //color: "#000"
+    },
+    //does not work because of limitations
+    buttonStyle: {
+      color: 'black'
     }
 });
 

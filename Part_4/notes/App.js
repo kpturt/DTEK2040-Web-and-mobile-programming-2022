@@ -18,6 +18,7 @@ const NotesScreen = () => {
   const [text, setText] = useState('');
   const handleChangeText = event => {
     setNotes([...notes, {text: text, id: generateID()}])
+    setText('')
   }
   
   const generateID = () =>{
@@ -28,20 +29,20 @@ const NotesScreen = () => {
   return ( 
     <View style={styles.view}>
       <View style={styles.header}>
-        <Text>My notes</Text>
+        <Text>MY NOTES</Text>
       </View>
       <ScrollView style={styles.notes}>
         <Text>{notes.map(note => `${note.text} ${note.id} \n`)}</Text>
       </ScrollView>
       <View>
         <TextInput
-          style={{height: 40}}
-          placeholder="Type here to translate!"
+          style={styles.input}
+          placeholder="Type here to add a note.."
           onChangeText={newText => setText(newText)}
           defaultValue={text}
         />
-        <View style={styles.button}>
-          <Button title="add note" onPress={() => handleChangeText()} />
+        <View style={styles.buttonArea}>
+          <Button style={styles.buttonStyle} title="add note" onPress={() => handleChangeText()} />
         </View>
       </View>
     </View>
