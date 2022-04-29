@@ -8,13 +8,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './Styles';
 import AddNoteScreen from './AddNoteScreen';
 
-const NotesScreen = ({ route, navigation }) => {
+const NotesScreen = ({ navigation }) => {
   
   // trying to receive notes from AddNoteScreen, gives an error
   //const {notes} = route.params;
-
+  const [notes, setNotes] = useState([ // state where we store our notes, passes as undefined?
+    { text: "Note a", id: 1 },
+    { text: "Note b", id: 2 },
+    { text: "Note c", id: 3 },
+    { text: "Note d", id: 4 },
+  ]);
   //test object just that the home page doesnt't crash
-  const notes = [{text: "asd", id: 1}]
+  
   console.log("notes NotesScreen: ", notes)
 
   // tried to change the passing type of notes
